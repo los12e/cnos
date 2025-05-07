@@ -1,0 +1,44 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <stdlib.h>
+#include<unistd.h>
+#include<time.h>
+void sender();
+void receiver(int frame);
+int main() {
+ srand(time(0));
+ sender();
+    return 0;
+}
+void sender(){
+    int frame =0;
+    char ack;
+    int timeout;
+    while(frame < 5 ){
+        printf("sender:sending frame %d \n",frame);
+        if(rand()% 10 < 3){
+            printf("sender:Frame %d lost! resending.. \n\n",frame);
+            sleep(1);
+            continue;
+        }
+        receiver(frame);
+        timeout = rand()%10;
+        printf("sender: waiting for acknowledgment.. \n");
+        sleep(1);
+        if(timeout < 2){
+            printf("sender:timeout occured! resending frame %d \n\n",frame);
+            continue;
+        }
+        printf("Recceiver: enter 'y' to acknowledge frame %d ", frame);
+        scanf("%c",&ack);
+        if (ack =='Y'|| ack =='y'){
+            printf("Sender: Acknowledgement received ofr frame %d \n\n",frame);
+            frame++;
+        }else{
+            printf("Sender: Acknowledgement not received resending frame %d \n\n",frame);
+        }
+    }
+}
+void receiver(int frame){
+    printf("Receiver: frame %d received successfully \n",frame);
+}
