@@ -93,6 +93,10 @@ Page Number: 2
 Offset: 380
 Mapped to Frame: 1
 Physical Address: 1780
+
+
+
+    
 13b). SEGMENTATION:
 #include <stdio.h>
 
